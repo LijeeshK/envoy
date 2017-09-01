@@ -200,6 +200,7 @@ TEST_F(LogicalDnsClusterTest, Basic) {
   EXPECT_EQ("", data.host_description_->zone());
   EXPECT_EQ("foo.bar.com", data.host_description_->hostname());
   data.host_description_->outlierDetector().putHttpResponseCode(200);
+  data.host_description_->healthChecker().setUnhealthy();
 
   expectResolve(Network::DnsLookupFamily::V4Only);
   resolve_timer_->callback_();

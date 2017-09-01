@@ -86,6 +86,9 @@ public:
         dispatcher_->createClientConnection(socket_.localAddress(), source_address_);
     client_connection_->addConnectionCallbacks(client_callbacks_);
     EXPECT_EQ(nullptr, client_connection_->ssl());
+    const Network::ClientConnection& const_connection = *client_connection_;
+    EXPECT_EQ(nullptr, const_connection.ssl());
+    EXPECT_FALSE(client_connection_->usingOriginalDst());
   }
 
   void connect() {
